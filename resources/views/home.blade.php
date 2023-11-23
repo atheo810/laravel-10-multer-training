@@ -1,34 +1,42 @@
 @extends('layouts.master')
 
 @section('content')
-    <main role="main" class="container">
-        <h1 class="mt-5 text-danger">Home</h1>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cum pariatur ratione quaerat vero a, ullam reiciendis
-        earum distinctio nihil exercitationem quidem neque odit aliquid quasi esse, repudiandae, adipisci non placeat.
-
-        <div class="row mt-5">
-            @foreach ($blogs as $blog)
-                @if ($blog['status'] == 1)
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2>{{ $blog['title'] }}</h2>
-                                <p>{{ $blog['body'] }}</p>
-                            </div>
-                        </div>
-                    </div>
-                @else
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2>{{ $blog['title'] }}</h2>
-                                <p>{{ $blog['body'] }}</p>
-                                <div class="btn-sm btn-warning">Pending</div>
-                            </div>
-                        </div>
-                    </div>
-                @endif
-            @endforeach
+    {{-- <div class="row mt-5">
+    @foreach ($addresses as $address)
+        <div class="col-md-3">
+            <div class="card">
+                <h4>{{ $address->user->name }}</h4>
+                <p>{{ $address->email }}</p>
+                <p>{{ $address->address }}</p>
+            </div>
         </div>
+        <div class="col-md-3">
+            <div class="card">
+                <h4>{{ $user->name }}</h4>
+                <p>{{ $user->email }}</p>
+                <p>{{ $user->address->address }}</p>
+            </div>
+        </div> 
+    @endforeach
+</div> --}}
+    <main role="main" class="container">
+        <div class="col-md-4 mt-5">
+            <div class="card">
+                <div class="card-body">
+                    <form action="{{ route('upload-file') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <label for="name">Upload</label>
+                            <input type="file" name="image" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success mt-2">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <a href="{{ route('download') }}" class="btn btn-primary mt-3">Downoad Here</a>
     </main>
 @endsection
