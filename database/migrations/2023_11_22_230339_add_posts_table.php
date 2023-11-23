@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::table('posts', function (Blueprint $table) {
             $table->date('publish_date');
             $table->integer('user_id');
+            $table->integer('category_id');
         });
     }
 
