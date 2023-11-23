@@ -17,6 +17,17 @@ class Post extends Model
         'description',
         'status',
         'publish_date',
-        'user_id'
+        'user_id',
+        'category_id'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'post_tag', 'post_id', 'tag_id');
+    }
 }
